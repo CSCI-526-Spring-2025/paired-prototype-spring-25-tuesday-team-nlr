@@ -1,0 +1,49 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditorInternal;
+using UnityEngine;
+
+public class PlayerMovement : MonoBehaviour
+{
+    [SerializeField] private float movingSpeed = 2f;
+    // Update is called once per frame
+    void Update()
+    {
+        Boolean isLeftPlayer = gameObject.tag == "LeftPlayer", 
+                isRightPlayer = gameObject.tag == "RightPlayer";
+        if(SideSwitching.HasSideSwitched){
+            if(isRightPlayer) HandleLeftPlayerMovement(gameObject);
+            if(isLeftPlayer) HandleRightPlayerMovement(gameObject);
+        }else{
+            if(isLeftPlayer) HandleLeftPlayerMovement(gameObject);
+            if(isRightPlayer) HandleRightPlayerMovement(gameObject);
+        }
+
+    }
+
+    private void HandleRightPlayerMovement(GameObject gObj){
+        if(Input.GetKey("up")){
+            goUp(gObj);
+        }else if(Input.GetKey("down")){
+            goDown(gObj);
+        }
+    }
+
+    private void HandleLeftPlayerMovement(GameObject gObj){
+        if(Input.GetKey("w")){
+            goUp(gObj);
+        }else if(Input.GetKey("s")){
+            goDown(gObj);
+        }
+    }
+
+    private void goUp(GameObject gObj){
+        gObj.transform.Translate(Vector3.up*movingSpeed*Time.deltaTime);
+    }
+
+    private void goDown(GameObject gObj){
+        gObj.transform.Translate(Vector3.down*movingSpeed*Time.deltaTime);
+    }
+}
