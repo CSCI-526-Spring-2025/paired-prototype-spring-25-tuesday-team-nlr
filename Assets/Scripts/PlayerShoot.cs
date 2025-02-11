@@ -20,10 +20,12 @@ public class PlayerShoot : MonoBehaviour
     }
 
     private void HandleShooting(){
-        
-        if(Mouse.current.leftButton.wasPressedThisFrame){
-            bulletInstance = Instantiate(bullet, bulletSpawnPoint.position, quaternion.identity);
-            bulletInstance.tag = gameObject.tag;
+        if(SideSwitching.gameStart)
+        {
+            if(Mouse.current.leftButton.wasPressedThisFrame){
+                bulletInstance = Instantiate(bullet, bulletSpawnPoint.position, quaternion.identity);
+                bulletInstance.tag = gameObject.tag;
+            }
         }
     }
 }
