@@ -8,19 +8,26 @@ using UnityEngine;
 public class WinnerManager : MonoBehaviour
 {
     public static WinnerManager Instance { get; private set; }
-    public int p1_Soldiers=4, p2_Soldiers=4;
+    public List<GameObject> left_Soldiers = new List<GameObject>(), 
+                            right_Soldiers = new List<GameObject>();
     public bool hasGameResolved = false;
 
-    public void DecreaseSoldiers(String sideTag)
+    private void Start()
+    {
+        left_Soldiers = PlayerManager.Instance.leftPlayerList;
+        right_Soldiers = PlayerManager.Instance.rightPlayerList;
+    }
+
+    public void RemoveSoldier(String sideTag, GameObject soldier)
     {
         if (sideTag == "left")
         {
-            p1_Soldiers--;
+            left_Soldiers.Remove(soldier);
             //Debug.Log("p1: " + p1_Soldiers);
         }
         else if(sideTag == "right")
         {
-            p2_Soldiers--;
+            right_Soldiers.Remove(soldier);
             //Debug.Log("p2: " + p2_Soldiers);
         }
         ShouldEndGame();
@@ -28,13 +35,13 @@ public class WinnerManager : MonoBehaviour
 
     public void ShouldEndGame()
     {
-        if (p1_Soldiers == 0 || p2_Soldiers == 0) {EndGame();}
+        if (right_Soldiers.Count == 0 || left_Soldiers.Count == 0) {EndGame();}
     }
 
     private void EndGame()
     {
         String winner = "n/a";
-        if (p1_Soldiers == 0)
+        if (left_Soldiers.Count == 0)
         {
             if (SideSwitching.HasSideSwitched)
             {
@@ -44,7 +51,7 @@ public class WinnerManager : MonoBehaviour
             {
                 winner = "P2";
             }
-        }else if (p2_Soldiers == 0)
+        }else if (right_Soldiers.Count == 0)
         {
             if (SideSwitching.HasSideSwitched)
             {

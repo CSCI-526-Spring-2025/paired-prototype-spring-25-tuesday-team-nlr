@@ -25,9 +25,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnBecameInvisible()
     {
-        Destroy(gameObject);
         String tag = (gameObject.tag == "LeftPlayer") ? "left":"right";
-        WinnerManager.Instance.DecreaseSoldiers(tag);
+        WinnerManager.Instance.RemoveSoldier(tag, gameObject);
+        Destroy(gameObject);
     }
 
     private void HandleRightPlayerMovement(GameObject gObj){

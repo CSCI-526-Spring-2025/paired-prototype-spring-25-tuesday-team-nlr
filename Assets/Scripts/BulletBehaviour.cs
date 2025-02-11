@@ -37,11 +37,21 @@ private Rigidbody2D rb;
         GameObject collidingObject = collision.gameObject;
         
         if((whatDestroysBullet.value & (1 << collidingObject.layer))>0){
-            if(gameObject != null) Destroy(gameObject);
+            if (gameObject != null)
+            {
+                if (tag == "left")
+                {
+                    PlayerManager.Instance.leftPlayerList.Remove(gameObject);
+                }else if (tag == "right")
+                {
+                    PlayerManager.Instance.rightPlayerList.Remove(gameObject);
+                }
+                Destroy(gameObject);
+            }
             if (collidingObject != null) Destroy(collidingObject);
         }
         
-        if (tag != "blank") WinnerManager.Instance.DecreaseSoldiers(tag);
+        if (tag != "blank") WinnerManager.Instance.RemoveSoldier(tag, gameObject);
     }
 
     private void SetStraightVelocity(){
