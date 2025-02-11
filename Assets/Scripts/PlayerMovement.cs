@@ -23,6 +23,13 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+    private void OnBecameInvisible()
+    {
+        Destroy(gameObject);
+        String tag = (gameObject.tag == "LeftPlayer") ? "left":"right";
+        WinnerManager.Instance.DecreaseSoldiers(tag);
+    }
+
     private void HandleRightPlayerMovement(GameObject gObj){
         if(Input.GetKey("up")){
             goUp(gObj);
@@ -39,11 +46,35 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void goUp(GameObject gObj){
-        gObj.transform.Translate(Vector3.up*movingSpeed*Time.deltaTime);
+    private void goUp(GameObject gObj)
+    {
+        Vector3 trans = Vector3.up * movingSpeed * Time.deltaTime;
+        Vector3 newPos = gObj.transform.position + trans;
+        if (newPos.y > 4.5)
+        {
+            Destroy(gObj);
+            WinnerManager.Instance.ShouldEndGame();
+        }
+        else
+        {
+            gObj.transform.Translate(trans);
+        }
+        
     }
 
-    private void goDown(GameObject gObj){
-        gObj.transform.Translate(Vector3.down*movingSpeed*Time.deltaTime);
+    private void goDown(GameObject gObj)
+    {
+        Vector3 trans = Vector3.down * movingSpeed * Time.deltaTime;
+        Vector3 newPos = gObj.transform.position + trans;
+        if (newPos.y < -4.5)
+        {
+            Destroy(gObj);
+            WinnerManager.Instance.ShouldEndGame();
+        }
+        else
+        {
+            gObj.transform.Translate(trans);
+        }
+        
     }
 }

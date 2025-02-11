@@ -3,6 +3,16 @@ using System.Collections;
 
 public static class TimerManager
 {
+    
+    public static void PauseGame ()
+    {
+        Time.timeScale = 0;
+    }
+
+    public static void ResumeGame ()
+    {
+        Time.timeScale = 1;
+    }
     private class TimerRunner : MonoBehaviour { } // for running coroutines
 
     private static TimerRunner _runner;
