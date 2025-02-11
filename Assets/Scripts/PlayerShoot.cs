@@ -13,7 +13,7 @@ public class PlayerShoot : MonoBehaviour
 
     private GameObject bulletInstance;
 
-    // Update is called once per frame
+ 
     void Update()
     {
         HandleShooting();

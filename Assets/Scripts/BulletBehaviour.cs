@@ -11,7 +11,6 @@ private Rigidbody2D rb;
 [SerializeField] private float velocityMultiplier = 15f;
 [SerializeField] private LayerMask whatDestroysBullet;
 
-    // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
