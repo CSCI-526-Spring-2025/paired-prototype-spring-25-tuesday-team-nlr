@@ -23,7 +23,13 @@ public class PlayerShoot : MonoBehaviour
         
         if(Mouse.current.leftButton.wasPressedThisFrame){
             bulletInstance = Instantiate(bullet, bulletSpawnPoint.position, quaternion.identity);
-            bulletInstance.tag = gameObject.tag;
+            if (gameObject.tag == "LeftPlayer")
+            {
+                bulletInstance.tag = "LeftBullet";
+            }else if (gameObject.tag == "RightPlayer")
+            {
+                bulletInstance.tag = "RightBullet";
+            }
         }
     }
 }

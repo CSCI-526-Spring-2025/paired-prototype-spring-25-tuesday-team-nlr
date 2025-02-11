@@ -24,16 +24,28 @@ private Rigidbody2D rb;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        String tag = "blank";
+        if (collision.gameObject.tag == "LeftBullet" && gameObject.tag == "RightPlayer")
+        {
+            tag = "right";
+        }
+        if (collision.gameObject.tag == "RightBullet" && gameObject.tag == "LeftPlayer")
+        {
+            tag = "left";
+        }
+
         GameObject collidingObject = collision.gameObject;
         
         if((whatDestroysBullet.value & (1 << collidingObject.layer))>0){
             if(gameObject != null) Destroy(gameObject);
             if (collidingObject != null) Destroy(collidingObject);
         }
+        
+        if (tag != "blank") WinnerManager.Instance.DecreaseSoldiers(tag);
     }
 
     private void SetStraightVelocity(){
         rb.velocity = transform.right * velocityMultiplier;
-        if(gameObject.CompareTag("RightPlayer")) rb.velocity *= -1;
+        if(gameObject.CompareTag("RightBullet")) rb.velocity *= -1;
     }
 }
