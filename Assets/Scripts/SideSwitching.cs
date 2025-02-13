@@ -50,14 +50,18 @@ public class SideSwitching
 
     private static void SwitchSides()
     {
-        displaytimer = false;
-        switchBackground = false;
-        Color originalColor = Camera.main.backgroundColor;
-        hasSideSwitched = !hasSideSwitched;
-        Camera.main.backgroundColor = Color.green;
-        TimerManager.StartTimer(.5f,
-                                () => Camera.main.backgroundColor = originalColor,
-                                true);
+        if(gameStart)
+        {
+            displaytimer = false;
+            switchBackground = false;
+            Color originalColor = Camera.main.backgroundColor;
+            hasSideSwitched = !hasSideSwitched;
+            Camera.main.backgroundColor = Color.green;
+            TimerManager.StartTimer(.5f,
+                () => Camera.main.backgroundColor = originalColor,
+                true);
+        }
+
     }
 
 }

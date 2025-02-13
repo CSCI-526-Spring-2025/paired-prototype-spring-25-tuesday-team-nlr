@@ -8,6 +8,7 @@ TagManager:
   - RightPlayer
   - LeftBullet
   - RightBullet
+  - Wall
   layers:
   - Default
   - TransparentFX

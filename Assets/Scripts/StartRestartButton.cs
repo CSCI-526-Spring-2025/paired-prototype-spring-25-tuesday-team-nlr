@@ -2,13 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 public class StartRestartButton : MonoBehaviour
 {
     public TMP_Text ButtonText;
+    public GameObject winnerPanel; 
     public TimerUI timer;
     private bool isStart = true;
     private string endText = "Restart";
     // Start is called before the first frame update
+
+    void Start()
+    {
+        winnerPanel.gameObject.SetActive(false);
+    }
     public void OnClick()
     {
         if (isStart)
@@ -25,18 +32,18 @@ public class StartRestartButton : MonoBehaviour
 
     void Update()
     {
-        if (timer.GetGameStatus())
-        {
-            RestartGame();
-        }
+
     }
+    
     public void RestartGame()
     {
+        SceneManager.LoadScene(0);
         isStart = true;
-        ButtonText.text = "Start";
-        Debug.Log("Restart");
         timer.RestartGame();
         SideSwitching.gameStart = false;
+        ButtonText.text = "Start";
+        Debug.Log("Restart");
+        WinnerManager.Instance.HideUI();
     }
 
     public void StartGame()
@@ -44,5 +51,6 @@ public class StartRestartButton : MonoBehaviour
         Debug.Log("Starting");
         timer.StartGame();
         SideSwitching.gameStart = true;
+        WinnerManager.Instance.HideUI();
     }
 }

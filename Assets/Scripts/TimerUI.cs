@@ -27,13 +27,11 @@ public class TimerUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-
         int min = Mathf.FloorToInt(gameTimeUI / 60);
         int sec = Mathf.FloorToInt(gameTimeUI % 60);
-        gameTimerText.text = string.Format("{0:00}:{1:00}", min, sec);
-        if (gameStart)
+        if (gameStart && SideSwitching.gameStart)
         {
+            gameTimerText.text = string.Format("{0:00}:{1:00}", min, sec);
             gameTimeUI -= Time.deltaTime;
             if (SideSwitching.displaytimer)
             {
@@ -57,7 +55,8 @@ public class TimerUI : MonoBehaviour
             }
             if (gameTimeUI <= 0)
             {
-                gameStart = false;
+                gameTimerText.text = "Game Over";
+                WinnerManager.Instance.EndGame();
                 endGame = true;
             }
         }

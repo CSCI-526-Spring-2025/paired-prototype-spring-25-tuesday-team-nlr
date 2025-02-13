@@ -7,27 +7,33 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] private bool canMove = true;
     [SerializeField] private float movingSpeed = 2f;
     // Update is called once per frame
     void Update()
     {
-        Boolean isLeftPlayer = gameObject.tag == "LeftPlayer", 
-                isRightPlayer = gameObject.tag == "RightPlayer";
-        if(SideSwitching.HasSideSwitched){
-            if(isRightPlayer) HandleLeftPlayerMovement(gameObject);
-            if(isLeftPlayer) HandleRightPlayerMovement(gameObject);
-        }else{
-            if(isLeftPlayer) HandleLeftPlayerMovement(gameObject);
-            if(isRightPlayer) HandleRightPlayerMovement(gameObject);
+        if(SideSwitching.gameStart)
+        {
+            Boolean isLeftPlayer = gameObject.tag == "LeftPlayer", 
+            isRightPlayer = gameObject.tag == "RightPlayer";
+            if(SideSwitching.HasSideSwitched){
+                if(isRightPlayer) HandleLeftPlayerMovement(gameObject);
+                if(isLeftPlayer) HandleRightPlayerMovement(gameObject);
+            }else{
+                if(isLeftPlayer) HandleLeftPlayerMovement(gameObject);
+                if(isRightPlayer) HandleRightPlayerMovement(gameObject);
+            }
         }
-
     }
 
     private void OnBecameInvisible()
     {
-        String tag = (gameObject.tag == "LeftPlayer") ? "left":"right";
-        WinnerManager.Instance.RemoveSoldier(tag, gameObject);
-        Destroy(gameObject);
+        if(SideSwitching.gameStart)
+        {
+            String tag = (gameObject.tag == "LeftPlayer") ? "left":"right";
+            WinnerManager.Instance.RemoveSoldier(tag, gameObject);
+            Destroy(gameObject);
+        }
     }
 
     private void HandleRightPlayerMovement(GameObject gObj){
@@ -50,12 +56,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector3 trans = Vector3.up * movingSpeed * Time.deltaTime;
         Vector3 newPos = gObj.transform.position + trans;
-        if (newPos.y > 4.5)
-        {
-            Destroy(gObj);
-            WinnerManager.Instance.ShouldEndGame();
-        }
-        else
+        if (newPos.y < 2.313545)
         {
             gObj.transform.Translate(trans);
         }
@@ -66,15 +67,11 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector3 trans = Vector3.down * movingSpeed * Time.deltaTime;
         Vector3 newPos = gObj.transform.position + trans;
-        if (newPos.y < -4.5)
-        {
-            Destroy(gObj);
-            WinnerManager.Instance.ShouldEndGame();
-        }
-        else
+        if (newPos.y > -3.335765)
         {
             gObj.transform.Translate(trans);
         }
         
     }
+
 }

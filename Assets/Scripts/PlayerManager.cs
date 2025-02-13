@@ -31,6 +31,7 @@ public class PlayerManager : MonoBehaviour
         GameObject newLeftPlayer = Instantiate(leftPlayerPrefab, spawnPosition, Quaternion.identity);
         newLeftPlayer.tag = "LeftPlayer";
         leftPlayers.Add(newLeftPlayer);
+        
     }
 
     public void SpawnRightPlayer()
