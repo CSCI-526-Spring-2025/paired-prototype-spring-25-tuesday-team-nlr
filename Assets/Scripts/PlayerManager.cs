@@ -6,7 +6,7 @@ public class PlayerManager : MonoBehaviour
     public static PlayerManager Instance;
     public GameObject leftPlayerPrefab, rightPlayerPrefab;
     public Transform leftSpawnPoint, rightSpawnPoint;
-    public float spawnOffsetY = 1.5f;
+    public float spawnOffsetY = -1.5f;
 
     private List<GameObject> leftPlayers = new List<GameObject>();
     private List<GameObject> rightPlayers = new List<GameObject>();
@@ -15,7 +15,6 @@ public class PlayerManager : MonoBehaviour
 
     void Start()
     {
-        // Spawn one player on each side at the start
         SpawnLeftPlayer();
         SpawnRightPlayer();
     }

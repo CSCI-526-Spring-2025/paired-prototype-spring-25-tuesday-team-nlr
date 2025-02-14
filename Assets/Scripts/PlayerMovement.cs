@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private bool canMove = true;
     [SerializeField] private float movingSpeed = 2f;
-    // Update is called once per frame
+
     void Update()
     {
         if(SideSwitching.gameStart)
@@ -60,7 +60,13 @@ public class PlayerMovement : MonoBehaviour
         {
             gObj.transform.Translate(trans);
         }
-        
+        else
+        {
+            String tag = (gameObject.tag == "LeftPlayer") ? "left" : "right";
+            WinnerManager.Instance.RemoveSoldier(tag, gObj);
+            Destroy(gObj);
+        }
+
     }
 
     private void goDown(GameObject gObj)

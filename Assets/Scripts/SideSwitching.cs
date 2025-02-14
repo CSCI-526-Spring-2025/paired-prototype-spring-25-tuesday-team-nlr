@@ -3,7 +3,7 @@ using TMPro;
 public class SideSwitching
 {
     public static bool gameStart = false;
-    private static bool hasSideSwitched = false;
+    public static bool hasSideSwitched = false;
     public static bool HasSideSwitched => hasSideSwitched;
     public static bool displaytimer = false;
     private static float timeLeftToDisplay = 0;

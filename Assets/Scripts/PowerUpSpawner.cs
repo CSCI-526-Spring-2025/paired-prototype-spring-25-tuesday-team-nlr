@@ -6,16 +6,12 @@ public class PowerUpSpawner : MonoBehaviour
 {
 
     public GameObject powerUpPrefab; 
-    public float minY = -3f, maxY = 3f; 
+    public float minY = -3f, maxY = 0f; 
     public float minX = -5f, maxX = 4f;
-    public float spawnInterval = 10f; 
-
+    public float spawnInterval = 10f;
+    public bool setFlag = true;
     void Start()
     {
-        if (SideSwitching.gameStart)
-        {
-            InvokeRepeating(nameof(SpawnPowerUp), spawnInterval, spawnInterval);
-        }
         
     }
 
@@ -23,13 +19,22 @@ public class PowerUpSpawner : MonoBehaviour
     {
         if (powerUpPrefab == null) return;
         float randomX = Random.Range(minX, maxX);
-        float randomY = Random.Range(minY, maxY); // Pick a random Y position
+        float randomY = Random.Range(minY, maxY); 
         Vector3 spawnPos = new Vector3(randomX, randomY, 0); 
 
-        Instantiate(powerUpPrefab, spawnPos, Quaternion.identity); // Spawn the power-up
+        Instantiate(powerUpPrefab, spawnPos, Quaternion.identity); 
     }
     void Update()
     {
-
+        if (SideSwitching.gameStart && setFlag)
+        {
+            setFlag = false;
+            InvokeRepeating(nameof(SpawnPowerUp), spawnInterval, spawnInterval);
+        }
+        if (!SideSwitching.gameStart)
+        {
+            CancelInvoke(nameof(SpawnPowerUp));
+            setFlag = true;
+        }
     }
 }

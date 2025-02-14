@@ -10,7 +10,6 @@ public class StartRestartButton : MonoBehaviour
     public TimerUI timer;
     private bool isStart = true;
     private string endText = "Restart";
-    // Start is called before the first frame update
 
     void Start()
     {
@@ -41,6 +40,7 @@ public class StartRestartButton : MonoBehaviour
         isStart = true;
         timer.RestartGame();
         SideSwitching.gameStart = false;
+        SideSwitching.hasSideSwitched = false;
         ButtonText.text = "Start";
         Debug.Log("Restart");
         WinnerManager.Instance.HideUI();
