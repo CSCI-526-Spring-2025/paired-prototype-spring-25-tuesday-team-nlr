@@ -24,16 +24,17 @@ private Rigidbody2D rb;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log($"Bullet {gameObject.tag} hit {collision.gameObject.tag}");
+        Debug.Log($"Collision detected: {collision.gameObject.name} with layer {collision.gameObject.layer} and tag {collision.gameObject.tag}");
         String tag = "blank";
-        if (collision.gameObject.tag == "LeftBullet" && gameObject.tag == "RightPlayer")
-        {
-            tag = "right";
-        }
         if (collision.gameObject.tag == "RightBullet" && gameObject.tag == "LeftPlayer")
         {
             tag = "left";
         }
-
+        else if (collision.gameObject.tag == "LeftBullet" && gameObject.tag == "RightPlayer")
+        {
+            tag = "right";
+        }       
         GameObject collidingObject = collision.gameObject;
         
         if((whatDestroysBullet.value & (1 << collidingObject.layer))>0){

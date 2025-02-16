@@ -77,7 +77,13 @@ public class PlayerMovement : MonoBehaviour
         {
             gObj.transform.Translate(trans);
         }
-        
+        else
+        {
+            String tag = (gameObject.tag == "LeftPlayer") ? "left" : "right";
+            WinnerManager.Instance.RemoveSoldier(tag, gObj);
+            Destroy(gObj);
+        }
+
     }
 
 }

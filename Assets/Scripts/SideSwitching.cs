@@ -22,7 +22,6 @@ public class SideSwitching
         timeLeftToDisplay -= Time.deltaTime;
         if (timeLeftToDisplay <= 0)
         {
-            Debug.Log("Switching sides over");
             displaytimer = false;
             SwitchSides();
         }
@@ -39,7 +38,6 @@ public class SideSwitching
 
             if (shouldSwitchSides)
             {
-                Debug.Log("Switching sides");
                 switchBackground = true;
                 displaytimer = true;
                 timeLeftToDisplay = timeToDisplay;

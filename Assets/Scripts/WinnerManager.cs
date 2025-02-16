@@ -34,12 +34,12 @@ public class WinnerManager : MonoBehaviour
             if (sideTag == "left")
             {
                 left_Soldiers.Remove(soldier);
-                //Debug.Log("p1: " + p1_Soldiers);
+                Debug.Log("left: " + left_Soldiers);
             }
             else if(sideTag == "right")
             {
                 right_Soldiers.Remove(soldier);
-                //Debug.Log("p2: " + p2_Soldiers);
+                Debug.Log("right: " + right_Soldiers);
             }
             ShouldEndGame();
         }
@@ -54,7 +54,6 @@ public class WinnerManager : MonoBehaviour
     {
          if(SideSwitching.gameStart)
         {
-            Debug.Log("end game" + left_Soldiers.Count + " " + right_Soldiers.Count);
             String winner = "Player 1 Won!";
             if  (left_Soldiers.Count == right_Soldiers.Count)
             {
@@ -62,7 +61,6 @@ public class WinnerManager : MonoBehaviour
             }
             else if (left_Soldiers.Count > right_Soldiers.Count)
             {
-                SideSwitching.gameStart = false;
                 if (SideSwitching.HasSideSwitched)
                 {
                     winner = "Player 2 Won!";
@@ -102,7 +100,6 @@ public class WinnerManager : MonoBehaviour
 
     public void HideUI()
     {
-        Debug.Log("HideUI");
         winnerPanel.gameObject.SetActive(false);
     }
 

@@ -23,14 +23,15 @@ public class PlayerShoot : MonoBehaviour
         if(SideSwitching.gameStart)
         {
             if(Mouse.current.leftButton.wasPressedThisFrame){
-            bulletInstance = Instantiate(bullet, bulletSpawnPoint.position, quaternion.identity);
-                if (gameObject.tag == "LeftPlayer")
-                {
-                    bulletInstance.tag = "LeftBullet";
-                }else if (gameObject.tag == "RightPlayer")
-                {
-                    bulletInstance.tag = "RightBullet";
-                }
+                bulletInstance = Instantiate(bullet, bulletSpawnPoint.position, quaternion.identity);
+                bulletInstance.tag = gameObject.tag == "LeftPlayer" ? "LeftBullet" : "RightBullet";
+                //if (gameObject.tag == "LeftPlayer")
+                //{
+                //    bulletInstance.tag = "LeftBullet";
+                //}else if (gameObject.tag == "RightPlayer")
+                //{
+                //    bulletInstance.tag = "RightBullet";
+                //}
             }
         }
     }
