@@ -6,14 +6,13 @@ using UnityEngine.SceneManagement;
 public class StartRestartButton : MonoBehaviour
 {
     public TMP_Text ButtonText;
-    public GameObject winnerPanel; 
     public TimerUI timer;
     private bool isStart = true;
     private string endText = "Restart";
 
     void Start()
     {
-        winnerPanel.gameObject.SetActive(false);
+        WinnerManager.Instance.HideUI();
     }
     public void OnClick()
     {

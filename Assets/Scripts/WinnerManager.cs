@@ -14,7 +14,7 @@ public class WinnerManager : MonoBehaviour
     public List<GameObject> left_Soldiers = new List<GameObject>(), 
                             right_Soldiers = new List<GameObject>();
 
-
+    private bool isFirstGame = true;
     private void Start()
     {
         left_Soldiers = PlayerManager.Instance.leftPlayerList;
@@ -26,6 +26,7 @@ public class WinnerManager : MonoBehaviour
         left_Soldiers = PlayerManager.Instance.leftPlayerList;
         right_Soldiers = PlayerManager.Instance.rightPlayerList;
         ShouldEndGame();
+    
     }
     public void RemoveSoldier(String sideTag, GameObject soldier)
     {
@@ -51,33 +52,29 @@ public class WinnerManager : MonoBehaviour
 
     public void EndGame()
     {
-      
-        if(SideSwitching.gameStart)
+        String winner = "Player 1 Won!";
+        if  (left_Soldiers.Count == right_Soldiers.Count)
         {
-            String winner = "Player 1 Won!";
-            if  (left_Soldiers.Count == right_Soldiers.Count)
-            {
-                winner = "It's a Tie!";    
-            }
-            else if (left_Soldiers.Count > right_Soldiers.Count)
-            {
-                if (SideSwitching.HasSideSwitched)
-                {
-                    winner = "Player 2 Won!";
-                }
-            }
-            else
-            {
-                if (!SideSwitching.HasSideSwitched)
-                {
-                    winner = "Player 2 Won!";
-                }
-            }
-            Debug.Log(winner);
-            winnerText.text = string.Format(winner);
-            SideSwitching.gameStart = false;
-            winnerPanel.gameObject.SetActive(true);
+            winner = "It's a Tie!";    
         }
+        else if (left_Soldiers.Count > right_Soldiers.Count)
+        {
+            if (SideSwitching.HasSideSwitched)
+            {
+                winner = "Player 2 Won!";
+            }
+        }
+        else
+        {
+            if (!SideSwitching.HasSideSwitched)
+            {
+                winner = "Player 2 Won!";
+            }
+        }
+        Debug.Log(winner);
+        winnerText.text = string.Format(winner);
+        SideSwitching.gameStart = false;
+        winnerPanel.gameObject.SetActive(true);
     }
     private void Awake()
     {
@@ -105,4 +102,8 @@ public class WinnerManager : MonoBehaviour
         winnerPanel.gameObject.SetActive(false);
     }
 
+    public int GetTotalPlayers()
+    {
+        return left_Soldiers.Count + right_Soldiers.Count;
+    }
 }
