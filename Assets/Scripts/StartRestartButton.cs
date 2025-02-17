@@ -36,19 +36,19 @@ public class StartRestartButton : MonoBehaviour
     
     public void RestartGame()
     {
+        Debug.Log("RestartGame");
+        WinnerManager.Instance.HideUI();
         SceneManager.LoadScene(0);
         isStart = true;
         timer.RestartGame();
         SideSwitching.gameStart = false;
         SideSwitching.hasSideSwitched = false;
         ButtonText.text = "Start";
-        WinnerManager.Instance.HideUI();
     }
 
     public void StartGame()
     {
         timer.StartGame();
         SideSwitching.gameStart = true;
-        WinnerManager.Instance.HideUI();
     }
 }

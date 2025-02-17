@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
-using UnityEditor.Callbacks;
 using UnityEngine;
 
 public class BulletBehaviour : MonoBehaviour
@@ -24,8 +23,8 @@ private Rigidbody2D rb;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log($"Bullet {gameObject.tag} hit {collision.gameObject.tag}");
-        Debug.Log($"Collision detected: {collision.gameObject.name} with layer {collision.gameObject.layer} and tag {collision.gameObject.tag}");
+        // Debug.Log($"Bullet {gameObject.tag} hit {collision.gameObject.tag}");
+        // Debug.Log($"Collision detected: {collision.gameObject.name} with layer {collision.gameObject.layer} and tag {collision.gameObject.tag}");
         String tag = "blank";
         if (collision.gameObject.tag == "RightBullet" && gameObject.tag == "LeftPlayer")
         {

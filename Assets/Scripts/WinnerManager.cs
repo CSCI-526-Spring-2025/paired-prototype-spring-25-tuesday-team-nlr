@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
-using UnityEditor.VersionControl;
 using UnityEngine;
 using TMPro;
 
@@ -52,7 +51,8 @@ public class WinnerManager : MonoBehaviour
 
     public void EndGame()
     {
-         if(SideSwitching.gameStart)
+      
+        if(SideSwitching.gameStart)
         {
             String winner = "Player 1 Won!";
             if  (left_Soldiers.Count == right_Soldiers.Count)
@@ -73,9 +73,10 @@ public class WinnerManager : MonoBehaviour
                     winner = "Player 2 Won!";
                 }
             }
-            winnerPanel.gameObject.SetActive(true);
+            Debug.Log(winner);
             winnerText.text = string.Format(winner);
             SideSwitching.gameStart = false;
+            winnerPanel.gameObject.SetActive(true);
         }
     }
     private void Awake()
@@ -92,7 +93,7 @@ public class WinnerManager : MonoBehaviour
     }
     public void RestartGame()
     {
-        winnerPanel.gameObject.SetActive(false);
+        HideUI();
         left_Soldiers.Clear();
         right_Soldiers.Clear();
         Debug.Log("Winner Manager: Restart Game");
@@ -100,6 +101,7 @@ public class WinnerManager : MonoBehaviour
 
     public void HideUI()
     {
+        Debug.Log("hide UI");
         winnerPanel.gameObject.SetActive(false);
     }
 
